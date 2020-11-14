@@ -1,6 +1,6 @@
 # Here we store the user's data
 
-users_name = "Clarence"
+users_name = "User's name"
 # For PyOWM
-users_location = 'Batangas'
-owm_key = 'ff388bfc7ea3dfe38a2375b708e752aa'
+users_location = 'Location'
+owm_key = 'API Key'
