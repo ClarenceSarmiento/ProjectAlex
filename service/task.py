@@ -1,5 +1,4 @@
 # For performing tasks
-# import pyowm
 import pyowm
 import datetime
 import webbrowser
@@ -47,7 +46,7 @@ def play_music(file_name):
                 names = (os.path.join(root, file))
                 if file_name in names:
                     name = names.split('D:\\Music\\')[-1].strip()
-                    print(f'Playing {name}.')
+                    Alex_voice.speak(f'Playing {name}.')
                     name = names
                     mixer.init()
                     mixer.music.load(name)
@@ -58,12 +57,16 @@ def search(voice):
     client = wolframalpha.Client(client_key)
     query = str(voice)
     try:
-        res = client.query(query)
-        result = next(res.results).text
-        Alex_voice.speak(result)
+        try:
+            res = client.query(query)
+            result = next(res.results).text
+            Alex_voice.speak(result)
+        except BaseException:
+            result = wikipedia.summary(query, sentences=2)
+            Alex_voice.speak(result)
     except BaseException:
-        result = wikipedia.summary(query, sentences=2)
-        Alex_voice.speak(result)
+        url = "https://google.com/search?q=" + query
+        webbrowser.get().open(url)
 
 
 def website(voice):
