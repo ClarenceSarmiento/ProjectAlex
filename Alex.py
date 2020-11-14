@@ -26,11 +26,13 @@ while True:
         app = voice.split('run')[-1].strip()
         task.application(app)
     elif 'play' in voice:
-        music = voice.split('play')[-1].strip().title().replace(' ', '_')
+        try:
+            music = voice.split('play')[-1].strip().title().replace(' ', '_')
+        except FileNotFoundError:
+            music = voice.split('play')[-1].strip().title().replace(' ', '-')
         task.play_music(music)
     elif 'rest' in voice:
         Alex_voice.speak('Okay, Have a nice day.')
         exit()
     else:
-        pass
-        # Alex_voice.speak('Command not registered.')
+        Alex_voice.speak('Command not registered.')
