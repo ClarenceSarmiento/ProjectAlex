@@ -25,6 +25,9 @@ while True:
     elif 'run' in voice:
         app = voice.split('run')[-1].strip()
         task.application(app)
+    elif 'search' in voice:
+        search = voice.split('search')[-1].strip()
+        task.search(search)
     elif 'play' in voice:
         try:
             music = voice.split('play')[-1].strip().title().replace(' ', '_')

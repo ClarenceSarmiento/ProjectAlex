@@ -5,10 +5,13 @@ import datetime
 import webbrowser
 import subprocess
 import os
+import wolframalpha
+import wikipedia
 import pywhatkit as kit
 from pygame import mixer
 from datetime import date
 from config import owm_key
+from config import client_key
 from service import Alex_voice
 from service import current
 from commands import users_voice
@@ -51,6 +54,18 @@ def play_music(file_name):
                     mixer.music.play()
 
 
+def search(voice):
+    client = wolframalpha.Client(client_key)
+    query = str(voice)
+    try:
+        res = client.query(query)
+        result = next(res.results).text
+        Alex_voice.speak(result)
+    except BaseException:
+        result = wikipedia.summary(query, sentences=2)
+        Alex_voice.speak(result)
+
+
 def website(voice):
     if 'youtube' in voice:
         Alex_voice.speak('What do you want to play?')
@@ -59,10 +74,10 @@ def website(voice):
         kit.playonyt(youtube)
     elif 'google' in voice:
         Alex_voice.speak("What do you want to search for?")
-        search = users_voice.get()
+        google = users_voice.get()
         Alex_voice.speak("Searching...")
-        url = "https://google.com/search?q=" + search
-        Alex_voice.speak(f'Here are the results for {search}.')
+        url = "https://google.com/search?q=" + google
+        Alex_voice.speak(f'Here are the results for {google}.')
         webbrowser.get().open(url)
     elif 'facebook' in voice:
         Alex_voice.speak("Opening Facebook")
