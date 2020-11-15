@@ -90,22 +90,49 @@ def website(voice):
         url = "https://google.nl/maps/place/" + location + "/&amp;"
         Alex_voice.speak(f'Here is the location of {location}.')
         webbrowser.get().open(url)
+    elif 'github' in voice:
+        Alex_voice.speak('Opening Github')
+        url = 'https://github.com/'
+        webbrowser.get().open(url)
     else:
-        Alex_voice.speak(f"{voice} is not a website.")
+        Alex_voice.speak(f"{voice} is not available.")
 
 
 def application(voice):
-    if 'word' in voice:
+    if 'word' in voice or 'microsoft word' in voice:
         Alex_voice.speak("Running Microsoft Word")
         subprocess.Popen([r'C:\Program Files\Microsoft Office\root\Office16\WINWORD.EXE'])
-    elif 'powerpoint' in voice:
+    elif 'powerpoint' in voice or 'microsoft powerpoint' in voice:
         Alex_voice.speak("Running Microsoft Powerpoint")
         subprocess.Popen([r'C:\Program Files\Microsoft Office\root\Office16\POWERPNT.EXE'])
-    elif 'excel' in voice:
+    elif 'excel' in voice or 'microsoft excel' in voice:
         Alex_voice.speak("Running Microsoft Excel")
         subprocess.Popen([r'C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE'])
     elif 'discord' in voice:
         Alex_voice.speak('Running Discord')
         subprocess.Popen(r'C:\Users\acer\AppData\Local\Discord\app-0.0.308\Discord.exe')
+    elif 'windows explorer' in voice:
+        Alex_voice.speak('Running Windows Explorer')
+        subprocess.Popen(r'C:\Windows\explorer.exe')
     else:
-        Alex_voice.speak(f"{voice} is not an application.")
+        Alex_voice.speak(f"{voice} is not available.")
+
+
+def computer(voice):
+    if 'documents' in voice:
+        Alex_voice.speak('Accessing Computer Documents')
+        os.startfile(r'C:\Users\acer\Documents')
+    elif 'downloads' in voice:
+        Alex_voice.speak('Accessing Computer Downloads')
+        os.startfile(r'C:\Users\acer\Downloads')
+    elif 'pictures' in voice:
+        Alex_voice.speak('Accessing Computer Pictures')
+        os.startfile(r'C:\Users\acer\Pictures')
+    elif 'music' in voice:
+        Alex_voice.speak('Accessing Computer Music')
+        os.startfile(r'C:\Users\acer\Music')
+    elif 'videos' in voice:
+        Alex_voice.speak('Accessing Computer Videos')
+        os.startfile(r'C:\Users\acer\Videos')
+    else:
+        Alex_voice.speak(f"{voice} is not available.")

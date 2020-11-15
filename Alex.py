@@ -25,6 +25,9 @@ while True:
     elif 'run' in voice:
         app = voice.split('run')[-1].strip()
         task.application(app)
+    elif 'computer' in voice:
+        pc = voice.split('computer')[-1].strip()
+        task.computer(pc)
     elif 'search' in voice:
         search = voice.split('search')[-1].strip()
         task.search(search)
