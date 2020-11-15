@@ -45,11 +45,9 @@ def play_music(file_name):
             if file.endswith('.mp3'):
                 names = (os.path.join(root, file))
                 if file_name in names:
-                    name = names.split('D:\\Music\\')[-1].strip()
-                    Alex_voice.speak(f'Playing {name}.')
-                    name = names
+                    Alex_voice.speak(f'Now Playing {file_name}.')
                     mixer.init()
-                    mixer.music.load(name)
+                    mixer.music.load(names)
                     mixer.music.play()
 
 
