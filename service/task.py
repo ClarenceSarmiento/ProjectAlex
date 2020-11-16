@@ -16,7 +16,7 @@ from service import current
 from commands import users_voice
 
 
-def time():
+def time_update():
     now = datetime.datetime.now()
     time_12hour_format = now.strftime('%I:%M %p').lstrip("0")
     Alex_voice.speak(f"It's {time_12hour_format}")

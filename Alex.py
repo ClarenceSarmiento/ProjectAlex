@@ -16,7 +16,7 @@ while True:
     elif 'weather update' in voice:
         task.weather_update(users_location)
     elif 'time update' in voice:
-        task.time()
+        task.time_update()
     elif 'date' in voice:
         task.date_update()
     elif 'open' in voice:
