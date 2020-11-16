@@ -1,14 +1,15 @@
-# ProjectAlex
-Alex is an Artificial Intelligence Assistant created for personal purposes.
-It is inspired from the Marvel Movie Iron Man made by Tony Starks himself.
+# Project ALEX :shipit:
 
-# Features
-> Tell time, date and weather
-> Search 
-> play music and video
-> Open websites
-> Access computer file directory
-> Run computer applications
+> ## ***ALEX*** is an *artificial intelligence* inspired from the Marvel Movie Iron Man, J.A.R.V.I.S made by Tony Starks himself. ALEX is created just for fun and personal use.
 
-# Future Features
-> Facial Recognition
+**Main Features** of ***ALEX***:shipit::
+- :sound: **Voice** recognition
+- :computer: **Access** computer directory
+- :clock4: **Tell** date, time, and weather
+- :video_camera: **Play** music and video on YouTube
+- :musical_note: **Play** music and podcasts on supported apps
+- :floppy_disk: **Run** browsers and other applications
+- :iphone: **Open** websites
+
+**Future features** for ***ALEX***:shipit::
+- :camera: **Facial Recognition** for secured access
