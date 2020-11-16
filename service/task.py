@@ -16,17 +16,6 @@ from service import current
 from commands import users_voice
 
 
-def weather_update(location):
-    owm = pyowm.OWM(owm_key)
-    loc = owm.weather_manager().weather_at_place(location)
-    weather = loc.weather
-    temp = weather.temperature(unit='celsius')
-    status = weather.detailed_status
-    cleaned_temp_data = int(temp['temp'])
-    Alex_voice.speak(f'The temperature today in {location} is {cleaned_temp_data} degree celsius.')
-    Alex_voice.speak(f'The day today will have {status}.')
-
-
 def time():
     now = datetime.datetime.now()
     time_12hour_format = now.strftime('%I:%M %p').lstrip("0")
@@ -37,6 +26,17 @@ def date_update():
     today = date.today()
     Alex_voice.speak(f'Today is {current.day_of_week(today.weekday())}.')
     Alex_voice.speak(f'{current.c_month(today.month)} {today.day}, {today.year}.')
+
+
+def weather_update(location):
+    owm = pyowm.OWM(owm_key)
+    loc = owm.weather_manager().weather_at_place(location)
+    weather = loc.weather
+    temp = weather.temperature(unit='celsius')
+    status = weather.detailed_status
+    cleaned_temp_data = int(temp['temp'])
+    Alex_voice.speak(f'The temperature today in {location} is {cleaned_temp_data} degree celsius.')
+    Alex_voice.speak(f'The day today will have {status}.')
 
 
 def play_music(file_name):
