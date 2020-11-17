@@ -76,6 +76,7 @@ def website(voice):
     elif 'google' in voice:
         Alex_voice.speak("What do you want to search for?")
         google = users_voice.get()
+        google = google.split('search for')[-1].strip()
         Alex_voice.speak("Searching...")
         url = "https://google.com/search?q=" + google
         Alex_voice.speak(f'Here are the results for {google}.')
@@ -136,3 +137,26 @@ def computer(voice):
         os.startfile(r'C:\Users\acer\Videos')
     else:
         Alex_voice.speak(f"{voice} is not available.")
+
+
+def close(voice):
+    if 'word' in voice or 'microsoft word' in voice:
+        Alex_voice.speak('Closing Microsoft Word')
+        os.system('taskkill/f /im WINWORD.EXE')
+    elif 'powerpoint' in voice or 'microsoft powerpoint' in voice:
+        Alex_voice.speak('Closing Microsoft Powerpoint')
+        os.system('taskkill/f /im POWERPNT.EXE')
+    elif 'excel' in voice or 'microsoft excel' in voice:
+        Alex_voice.speak("Closing Microsoft Excel")
+        os.system('taskkill/f /im EXCEL.EXE')
+    elif 'discord' in voice:
+        Alex_voice.speak('Closing Discord')
+        os.system('taskkill/f /im Discord.exe')
+    elif 'windows explorer' in voice:
+        Alex_voice.speak('Closing Windows Explorer')
+        os.system('taskkill/f /im explorer.exe')
+    elif 'browser' in voice:
+        Alex_voice.speak('Closing Browser')
+        os.system('taskkill/f /im chrome.exe')
+    else:
+        Alex_voice.speak(f"{voice} is not open.")

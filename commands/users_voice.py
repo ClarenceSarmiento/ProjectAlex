@@ -15,7 +15,7 @@ def get():
             voice_data = r.recognize_google(audio)
         except sr.UnknownValueError:
             Alex_voice.speak('Sorry, I did not understand you.')
-            print('Listening....!')
+            Alex_voice.speak('Could you speak that again?')
             return get()
         except sr.RequestError:
             Alex_voice.speak('Sorry, my speech service is down.')

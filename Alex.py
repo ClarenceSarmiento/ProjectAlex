@@ -1,7 +1,7 @@
 # Project Alex - Clarence Sarmiento
 # Inspired by JARVIS in Iron Man
 # Own version of Artificial Intelligence
-# Import python package
+# Import python packages
 from service import Alex_voice
 from commands import users_voice
 from service import task
@@ -9,15 +9,18 @@ from config import users_location
 
 
 while True:
-    print('Listening...')
+    Alex_voice.speak('I am now listening...')
     voice = users_voice.get()
-    if 'hello' in voice:
-        Alex_voice.speak('Hi there.')
-    elif 'weather update' in voice:
+    if 'hello alex' in voice:
+        Alex_voice.speak('Hi there, what can I do for you?')
+    elif 'weather' in voice:
         task.weather_update(users_location)
-    elif 'time update' in voice:
+    elif 'time' in voice and not 'time and date':
         task.time_update()
-    elif 'date' in voice:
+    elif 'date' in voice and not 'time and date':
+        task.date_update()
+    elif 'time and date' in voice:
+        task.time_update()
         task.date_update()
     elif 'open' in voice:
         site = voice.split('open')[-1].strip()
@@ -37,6 +40,9 @@ while True:
         except FileNotFoundError:
             music = voice.split('play')[-1].strip().title().replace(' ', '-')
         task.play_music(music)
+    elif 'close' in voice:
+        app = voice.split('close')[-1].strip()
+        task.close(app)
     elif 'rest' in voice:
         Alex_voice.speak('Okay, Have a nice day.')
         exit()
