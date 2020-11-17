@@ -12,7 +12,7 @@ def alex():
     while True:
         Alex_voice.speak('I am now listening...')
         voice = users_voice.get()
-        if 'hello alex' in voice:
+        if 'hello' in voice:
             Alex_voice.speak('Hi there, what can I do for you?')
         elif 'weather' in voice:
             task.weather_update(users_location)
@@ -50,4 +50,3 @@ def alex():
         else:
             Alex_voice.speak('Command not registered.')
 
-alex()
