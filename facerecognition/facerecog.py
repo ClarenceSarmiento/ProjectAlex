@@ -19,12 +19,12 @@ known_face_names = [
 while True:
     ret, frame = video_capture.read()
     rgb_frame = frame[:, :, ::-1]
-
+    if True:
+        Alex_voice.speak('Scanning face...')
     face_location = face_recognition.face_locations(rgb_frame)
     face_encodings = face_recognition.face_encodings(rgb_frame, face_location)
     for (top, right, bottom, left), face_encodings in zip(face_location, face_encodings):
         matches = face_recognition.compare_faces(known_face_encoding, face_encodings)
-        Alex_voice.speak('Scanning face...')
         time.sleep(3)
         if True in matches:
             first_match_index = matches.index(True)
@@ -38,3 +38,5 @@ while True:
             exit()
         video_capture.release()
         cv2.destroyAllWindows()
+    else:
+        Alex_voice.speak('No face detected.')
