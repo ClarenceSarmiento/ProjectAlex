@@ -19,13 +19,13 @@ from commands import users_voice
 def time_update():
     now = datetime.datetime.now()
     time_12hour_format = now.strftime('%I:%M %p').lstrip("0")
-    Alex_voice.speak(f"It's {time_12hour_format}")
+    return Alex_voice.speak(f"It's {time_12hour_format}")
 
 
 def date_update():
     today = date.today()
-    Alex_voice.speak(f'Today is {current.day_of_week(today.weekday())}.')
-    Alex_voice.speak(f'{current.c_month(today.month)} {today.day}, {today.year}.')
+    return Alex_voice.speak(f'Today is {current.day_of_week(today.weekday())},'
+                            f'{current.c_month(today.month)} {today.day}, {today.year}.')
 
 
 def weather_update(location):
@@ -35,8 +35,8 @@ def weather_update(location):
     temp = weather.temperature(unit='celsius')
     status = weather.detailed_status
     cleaned_temp_data = int(temp['temp'])
-    Alex_voice.speak(f'The temperature today in {location} is {cleaned_temp_data} degree celsius.')
-    Alex_voice.speak(f'The day today will have {status}.')
+    return Alex_voice.speak(f'The temperature today in {location} is {cleaned_temp_data} degree celsius. The day '
+                            f'today will have {status}.')
 
 
 def play_music(file_name):
@@ -58,13 +58,22 @@ def search(voice):
         try:
             res = client.query(query)
             result = next(res.results).text
-            Alex_voice.speak(result)
+            return Alex_voice.speak(result)
         except BaseException:
             result = wikipedia.summary(query, sentences=2)
-            Alex_voice.speak(result)
+            return Alex_voice.speak(result)
     except BaseException:
         url = "https://google.com/search?q=" + query
-        webbrowser.get().open(url)
+        return webbrowser.get().open(url)
+
+
+def take_note(voice):
+    current_date = datetime.datetime.now()
+    file_name = str(current_date).replace(":", "-") + "-note.txt"
+    with open(file_name, "w") as f:
+        f.write(voice)
+    subprocess.Popen(["notepad.exe", file_name])
+    return Alex_voice.speak("I made a note out of that.")
 
 
 def website(voice):
@@ -72,7 +81,7 @@ def website(voice):
         Alex_voice.speak('What do you want to play?')
         youtube = users_voice.get()
         Alex_voice.speak(f'Playing {youtube}')
-        kit.playonyt(youtube)
+        return kit.playonyt(youtube)
     elif 'google' in voice:
         Alex_voice.speak("What do you want to search for?")
         google = users_voice.get()
@@ -80,83 +89,83 @@ def website(voice):
         Alex_voice.speak("Searching...")
         url = "https://google.com/search?q=" + google
         Alex_voice.speak(f'Here are the results for {google}.')
-        webbrowser.get().open(url)
+        return webbrowser.get().open(url)
     elif 'facebook' in voice:
         Alex_voice.speak("Opening Facebook")
         url = "https://www.facebook.com/"
-        webbrowser.get().open(url)
+        return webbrowser.get().open(url)
     elif 'location' in voice:
         Alex_voice.speak("What is the location?")
         location = users_voice.get()
         url = "https://google.nl/maps/place/" + location + "/&amp;"
         Alex_voice.speak(f'Here is the location of {location}.')
-        webbrowser.get().open(url)
+        return webbrowser.get().open(url)
     elif 'github' in voice:
         Alex_voice.speak('Opening Github')
         url = 'https://github.com/'
-        webbrowser.get().open(url)
+        return webbrowser.get().open(url)
     else:
-        Alex_voice.speak(f"{voice} is not available.")
+        return Alex_voice.speak(f"{voice} is not available.")
 
 
 def application(voice):
     if 'word' in voice or 'microsoft word' in voice:
         Alex_voice.speak("Running Microsoft Word")
-        subprocess.Popen([r'C:\Program Files\Microsoft Office\root\Office16\WINWORD.EXE'])
+        return subprocess.Popen([r'C:\Program Files\Microsoft Office\root\Office16\WINWORD.EXE'])
     elif 'powerpoint' in voice or 'microsoft powerpoint' in voice:
         Alex_voice.speak("Running Microsoft Powerpoint")
-        subprocess.Popen([r'C:\Program Files\Microsoft Office\root\Office16\POWERPNT.EXE'])
+        return subprocess.Popen([r'C:\Program Files\Microsoft Office\root\Office16\POWERPNT.EXE'])
     elif 'excel' in voice or 'microsoft excel' in voice:
         Alex_voice.speak("Running Microsoft Excel")
-        subprocess.Popen([r'C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE'])
+        return subprocess.Popen([r'C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE'])
     elif 'discord' in voice:
         Alex_voice.speak('Running Discord')
-        subprocess.Popen(r'C:\Users\acer\AppData\Local\Discord\app-0.0.308\Discord.exe')
+        return subprocess.Popen(r'C:\Users\acer\AppData\Local\Discord\app-0.0.308\Discord.exe')
     elif 'windows explorer' in voice:
         Alex_voice.speak('Running Windows Explorer')
-        subprocess.Popen(r'C:\Windows\explorer.exe')
+        return subprocess.Popen(r'C:\Windows\explorer.exe')
     else:
-        Alex_voice.speak(f"{voice} is not available.")
+        return Alex_voice.speak(f"{voice} is not available.")
 
 
 def computer(voice):
     if 'documents' in voice:
         Alex_voice.speak('Accessing Computer Documents')
-        os.startfile(r'C:\Users\acer\Documents')
+        return os.startfile(r'C:\Users\acer\Documents')
     elif 'downloads' in voice:
         Alex_voice.speak('Accessing Computer Downloads')
-        os.startfile(r'C:\Users\acer\Downloads')
+        return os.startfile(r'C:\Users\acer\Downloads')
     elif 'pictures' in voice:
         Alex_voice.speak('Accessing Computer Pictures')
-        os.startfile(r'C:\Users\acer\Pictures')
+        return os.startfile(r'C:\Users\acer\Pictures')
     elif 'music' in voice:
         Alex_voice.speak('Accessing Computer Music')
-        os.startfile(r'C:\Users\acer\Music')
+        return os.startfile(r'C:\Users\acer\Music')
     elif 'videos' in voice:
         Alex_voice.speak('Accessing Computer Videos')
-        os.startfile(r'C:\Users\acer\Videos')
+        return os.startfile(r'C:\Users\acer\Videos')
     else:
-        Alex_voice.speak(f"{voice} is not available.")
+        return Alex_voice.speak(f"{voice} is not available.")
 
 
 def close(voice):
     if 'word' in voice or 'microsoft word' in voice:
         Alex_voice.speak('Closing Microsoft Word')
-        os.system('taskkill/f /im WINWORD.EXE')
+        return os.system('taskkill/f /im WINWORD.EXE')
     elif 'powerpoint' in voice or 'microsoft powerpoint' in voice:
         Alex_voice.speak('Closing Microsoft Powerpoint')
-        os.system('taskkill/f /im POWERPNT.EXE')
+        return os.system('taskkill/f /im POWERPNT.EXE')
     elif 'excel' in voice or 'microsoft excel' in voice:
         Alex_voice.speak("Closing Microsoft Excel")
-        os.system('taskkill/f /im EXCEL.EXE')
+        return os.system('taskkill/f /im EXCEL.EXE')
     elif 'discord' in voice:
         Alex_voice.speak('Closing Discord')
-        os.system('taskkill/f /im Discord.exe')
+        return os.system('taskkill/f /im Discord.exe')
     elif 'windows explorer' in voice:
         Alex_voice.speak('Closing Windows Explorer')
-        os.system('taskkill/f /im explorer.exe')
+        return os.system('taskkill/f /im explorer.exe')
     elif 'browser' in voice:
         Alex_voice.speak('Closing Browser')
-        os.system('taskkill/f /im chrome.exe')
+        return os.system('taskkill/f /im chrome.exe')
     else:
-        Alex_voice.speak(f"{voice} is not open.")
+        return Alex_voice.speak(f"{voice} is not open.")

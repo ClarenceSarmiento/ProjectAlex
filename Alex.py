@@ -35,6 +35,9 @@ def alex():
         elif 'search' in voice:
             search = voice.split('search')[-1].strip()
             task.search(search)
+        elif 'note' in voice:
+            note_text = users_voice.get()
+            task.take_note(note_text)
         elif 'play' in voice:
             try:
                 music = voice.split('play')[-1].strip().title().replace(' ', '_')
