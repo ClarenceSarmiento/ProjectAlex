@@ -6,7 +6,7 @@ import Alex
 
 video_capture = cv2.VideoCapture(0)
 
-clarence_image = face_recognition.load_image_file('clarence.jpg')
+clarence_image = face_recognition.load_image_file('Resources\clarence.jpg')
 clarence_facial_encoding = face_recognition.face_encodings(clarence_image)[0]
 
 known_face_encoding = [
