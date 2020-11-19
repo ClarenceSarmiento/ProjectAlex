@@ -10,12 +10,13 @@ from service import Schedule_finder
 
 
 def alex():
+    Alex_voice.speak('I am now listening...')
     while True:
-        Alex_voice.speak('I am now listening...')
+        print('>>\\ Speak')
         voice = users_voice.get()
         if 'hello' in voice:
             Alex_voice.speak('Hi there, what can I do for you?')
-        elif 'weather' in voice:
+        elif 'weather update' in voice:
             task.weather_update(users_location)
         elif 'time update' in voice:
             task.time_update()
@@ -56,5 +57,4 @@ def alex():
             exit()
         else:
             Alex_voice.speak('Command not registered.')
-
-alex()
+        Alex_voice.speak('Anything else?')

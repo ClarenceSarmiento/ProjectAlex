@@ -16,6 +16,7 @@ def get():
         except sr.UnknownValueError:
             Alex_voice.speak('Sorry, I did not understand you.')
             Alex_voice.speak('Could you speak that again?')
+            print('>>\\ Speak')
             return get()
         except sr.RequestError:
             Alex_voice.speak('Sorry, my speech service is down.')
