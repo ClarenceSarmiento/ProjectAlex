@@ -1,11 +1,11 @@
-SpeechRecognition==3.8.1
 pyttsx3==2.90
 pywhatkit==3.2
 pyowm==3.1.1
-wolframalpha==4.0.0
+wolframalpha==4.1.0
 wikipedia==1.4.0
 pygame==2.0.0
 opencv-python==4.4.0.46
-googleapiclient==
 google==3.0.0
 pytz==2020.4
+pip~=20.2.4
+setuptools==50.3.2

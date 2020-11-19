@@ -11,7 +11,7 @@ from config import users_location
 def alex():
     while True:
         Alex_voice.speak('I am now listening...')
-        voice = users_voice.get()
+        voice = str(input('>>> '))  # users_voice.get()
         if 'hello' in voice:
             Alex_voice.speak('Hi there, what can I do for you?')
         elif 'weather' in voice:
@@ -23,6 +23,9 @@ def alex():
         elif 'time and date' in voice:
             task.time_update()
             task.date_update()
+        elif 'schedule' in voice:
+            sched = voice.split('schedule')[-1].strip()
+
         elif 'open' in voice:
             site = voice.split('open')[-1].strip()
             task.website(site)
@@ -52,4 +55,3 @@ def alex():
             exit()
         else:
             Alex_voice.speak('Command not registered.')
-
