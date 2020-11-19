@@ -6,12 +6,13 @@ from service import Alex_voice
 from commands import users_voice
 from service import task
 from config import users_location
+from service import Schedule_finder
 
 
 def alex():
     while True:
         Alex_voice.speak('I am now listening...')
-        voice = str(input('>>> '))  # users_voice.get()
+        voice = users_voice.get()
         if 'hello' in voice:
             Alex_voice.speak('Hi there, what can I do for you?')
         elif 'weather' in voice:
@@ -25,6 +26,7 @@ def alex():
             task.date_update()
         elif 'schedule' in voice:
             sched = voice.split('schedule')[-1].strip()
+            Schedule_finder.schedule(sched)
         elif 'open' in voice:
             site = voice.split('open')[-1].strip()
             task.website(site)
@@ -54,3 +56,6 @@ def alex():
             exit()
         else:
             Alex_voice.speak('Command not registered.')
+
+
+alex()

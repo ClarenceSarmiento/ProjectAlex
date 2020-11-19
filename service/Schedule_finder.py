@@ -30,20 +30,16 @@ def authenticate_google():
             credentials.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
-                'Alex.json', SCOPES)
+                'service/Alex.json', SCOPES)
             credentials = flow.run_local_server(port=0)
-
         with open('token.pickle', 'wb') as token:
             pickle.dump(credentials, token)
-
     service = build('calendar', 'v3', credentials=credentials)
-
     return service
 
 
 def get_events(day, service):
     # Call the Calendar API
-    global date
     date = datetime.datetime.combine(day, datetime.datetime.min.time())
     end_date = datetime.datetime.combine(day, datetime.datetime.max.time())
     utc = pytz.UTC
@@ -75,18 +71,15 @@ def get_events(day, service):
 
 
 def get_date(voice):
-    text = voice.lower()
     today = datetime.date.today()
-
-    if text.count("today") > 0:
+    if voice.count("today") > 0:
+        print(today)
         return today
-
     day = -1
     day_of_week = -1
     month = -1
     year = today.year
-
-    for word in text.split():
+    for word in voice.split():
         if word in MONTHS:
             month = MONTHS.index(word) + 1
         elif word in DAYS:
@@ -101,42 +94,35 @@ def get_date(voice):
                         day = int(word[:found])
                     except FileNotFoundError:
                         pass
-
     # THE NEW PART STARTS HERE
     if month < today.month and month != -1:  # if the month mentioned is before the current month
         # set the year to the next
-        year = year + 1
-
+        year += 1
     # This is slightly different from the video but the correct version
     if month == -1 and day != -1:  # if we didn't find a month, but we have a day
         if day < today.day:
             month = today.month + 1
         else:
             month = today.month
-
-    # if we only found a dta of the week
+    # if we only found a day of the week
     if month == -1 and day == -1 and day_of_week != -1:
         current_day_of_week = today.weekday()
         dif = day_of_week - current_day_of_week
-
         if dif < 0:
             dif += 7
-            if text.count("next") >= 1:
+            if voice.count("next") >= 1:
                 dif += 7
-
         return today + datetime.timedelta(dif)
-
-    if day != -1:  # FIXED FROM VIDEO
+    if day != -1:
         return datetime.date(month=month, day=day, year=year)
 
 
 SERVICE = authenticate_google()
-voice = 'do i have plans in friday'
-phrases = ["what do i have", "do i have plans", "am i busy"]
-for phrase in phrases:
-    if phrase in voice:
-        date = get_date(voice)
-        if date:
-            get_events(date, SERVICE)
-        else:
-            Alex_voice.speak("I don't understand")
+
+
+def schedule(voice):
+    date = get_date(voice)
+    if date:
+        get_events(date, SERVICE)
+    else:
+        Alex_voice.speak("I don't understand")
