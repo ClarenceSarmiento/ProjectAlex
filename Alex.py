@@ -56,6 +56,3 @@ def alex():
             exit()
         else:
             Alex_voice.speak('Command not registered.')
-
-
-alex()

@@ -30,7 +30,8 @@ def authenticate_google():
             credentials.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
-                'service/Alex.json', SCOPES)
+                client_secrets_file=r'C:\Users\acer\PycharmProjects\ProjectAlex\service\client_secrets_file.json',
+                scopes=SCOPES)
             credentials = flow.run_local_server(port=0)
         with open('token.pickle', 'wb') as token:
             pickle.dump(credentials, token)
