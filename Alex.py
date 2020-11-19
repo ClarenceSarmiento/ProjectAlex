@@ -25,7 +25,6 @@ def alex():
             task.date_update()
         elif 'schedule' in voice:
             sched = voice.split('schedule')[-1].strip()
-
         elif 'open' in voice:
             site = voice.split('open')[-1].strip()
             task.website(site)
