@@ -19,7 +19,7 @@ def alex():
             task.weather_update(users_location)
         elif 'time update' in voice:
             task.time_update()
-        elif 'date' in voice and 'time and date' not in voice:
+        elif 'date today' in voice:
             task.date_update()
         elif 'time and date' in voice:
             task.time_update()
@@ -56,3 +56,5 @@ def alex():
             exit()
         else:
             Alex_voice.speak('Command not registered.')
+
+alex()
