@@ -24,8 +24,8 @@ def alex():
         elif 'time and date' in voice:
             task.time_update()
             task.date_update()
-        elif 'schedule on' in voice:
-            sched = voice.split('schedule')[-1].strip()
+        elif 'what do i have on' in voice:
+            sched = voice.split('what do i have on')[-1].strip()
             Schedule_finder.schedule(sched)
         elif 'open' in voice:
             site = voice.split('open')[-1].strip()

@@ -24,7 +24,7 @@ def time_update():
 
 def date_update():
     today = date.today()
-    return Alex_voice.speak(f'Today is {current.day_of_week(today.weekday())},'
+    return Alex_voice.speak(f'Today is {current.day_of_week(today.weekday())}, '
                             f'{current.c_month(today.month)} {today.day}, {today.year}.')
 
 
@@ -35,8 +35,8 @@ def weather_update(location):
     temp = weather.temperature(unit='celsius')
     status = weather.detailed_status
     cleaned_temp_data = int(temp['temp'])
-    return Alex_voice.speak(f'The temperature today in {location} is {cleaned_temp_data} degree celsius. The day '
-                            f'today will have {status}.')
+    return Alex_voice.speak(f'The temperature today in {location} is {cleaned_temp_data} degree celsius. '
+                            f'The day today will have {status}.')
 
 
 def play_music(file_name):
