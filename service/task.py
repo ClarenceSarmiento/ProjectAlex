@@ -7,7 +7,6 @@ import os
 import wolframalpha
 import wikipedia
 import pywhatkit as kit
-from pygame import mixer
 from datetime import date
 from config import owm_key
 from config import client_key
@@ -37,36 +36,6 @@ def weather_update(location):
     cleaned_temp_data = int(temp['temp'])
     return Alex_voice.speak(f'The temperature today in {location} is {cleaned_temp_data} degree celsius. '
                             f'The day today will have {status}.')
-
-
-def play_music(voice):
-    for root, dirs, files in os.walk(r'D:\Music'):
-        for file in files:
-            if file.endswith('.mp3'):
-                names = (os.path.join(root, file))
-                if 'list' in voice:
-                    file_name = names.split('D:\\Music\\')[-1].strip()
-                    print(file_name)
-                elif 'play' in voice:
-                    try:
-                        music = voice.split('play')[-1].strip().title().replace(' ', '_')
-                    except FileNotFoundError:
-                        music = voice.split('play')[-1].strip().title().replace(' ', '-')
-                    if music in names:
-                        name = music.split('play')[-1].strip().title().replace('_', ' ')
-                        Alex_voice.speak(f'Now Playing {name}.')
-                        mixer.init()
-                        mixer.music.load(names)
-                        return mixer.music.play()
-                elif 'pause' in voice and 'unpause' not in voice:
-                    Alex_voice.speak('Pausing Music')
-                    return mixer.music.pause()
-                elif 'unpause' in voice:
-                    Alex_voice.speak('UnPausing Music')
-                    return mixer.music.unpause()
-                elif 'stop' in voice:
-                    Alex_voice.speak('Stopping Music')
-                    return mixer.music.stop()
 
 
 def search(voice):
