@@ -13,7 +13,7 @@ def alex():
     Alex_voice.speak('I am now listening...')
     while True:
         print('>>\\ Speak')
-        voice = users_voice.get()
+        voice = str(input('>> '))  # users_voice.get()
         if 'hello' in voice:
             Alex_voice.speak('Hi there, what can I do for you?')
         elif 'weather update' in voice:
@@ -43,11 +43,8 @@ def alex():
         elif 'note' in voice:
             note_text = users_voice.get()
             task.take_note(note_text)
-        elif 'play' in voice:
-            try:
-                music = voice.split('play')[-1].strip().title().replace(' ', '_')
-            except FileNotFoundError:
-                music = voice.split('play')[-1].strip().title().replace(' ', '-')
+        elif 'music' in voice:
+            music = voice.split('music')[-1].strip()
             task.play_music(music)
         elif 'close' in voice:
             app = voice.split('close')[-1].strip()
@@ -58,3 +55,6 @@ def alex():
         else:
             Alex_voice.speak('Command not registered.')
         Alex_voice.speak('Anything else?')
+
+
+alex()

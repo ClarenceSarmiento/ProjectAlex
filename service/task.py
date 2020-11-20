@@ -39,16 +39,31 @@ def weather_update(location):
                             f'The day today will have {status}.')
 
 
-def play_music(file_name):
+def play_music(voice):
     for root, dirs, files in os.walk(r'D:\Music'):
         for file in files:
             if file.endswith('.mp3'):
                 names = (os.path.join(root, file))
-                if file_name in names:
-                    Alex_voice.speak(f'Now Playing {file_name}.')
-                    mixer.init()
-                    mixer.music.load(names)
-                    mixer.music.play()
+                if 'play' in voice:
+                    try:
+                        music = voice.split('play')[-1].strip().title().replace(' ', '_')
+                    except FileNotFoundError:
+                        music = voice.split('play')[-1].strip().title().replace(' ', '-')
+                    if music in names:
+                        name = music.split('play')[-1].strip().title().replace('_', ' ')
+                        Alex_voice.speak(f'Now Playing {name}.')
+                        mixer.init()
+                        mixer.music.load(names)
+                        return mixer.music.play()
+                elif 'pause' in voice and 'unpause' not in voice:
+                    Alex_voice.speak('Pausing Music')
+                    return mixer.music.pause()
+                elif 'unpause' in voice:
+                    Alex_voice.speak('UnPausing Music')
+                    return mixer.music.unpause()
+                elif 'stop' in voice:
+                    Alex_voice.speak('Stopping Music')
+                    return mixer.music.stop()
 
 
 def search(voice):
