@@ -31,7 +31,8 @@ def play_music(voice):
                     name = (os.path.join(root, files[number]))
                     mixer.init()
                     mixer.music.load(name)
-                    return mixer.music.play()
+                    mixer.music.play()
+                    return Alex_voice.speak('Playing Random Music')
                 elif 'pause' in voice and 'unpause' not in voice:
                     Alex_voice.speak('Pausing Music')
                     return mixer.music.pause()
