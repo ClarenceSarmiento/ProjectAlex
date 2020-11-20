@@ -44,7 +44,10 @@ def play_music(voice):
         for file in files:
             if file.endswith('.mp3'):
                 names = (os.path.join(root, file))
-                if 'play' in voice:
+                if 'list' in voice:
+                    file_name = names.split('D:\\Music\\')[-1].strip()
+                    print(file_name)
+                elif 'play' in voice:
                     try:
                         music = voice.split('play')[-1].strip().title().replace(' ', '_')
                     except FileNotFoundError:
