@@ -11,10 +11,13 @@ from config import users_location
 
 
 def alex():
+    task.date_update()
+    Schedule_finder.schedule('today')
+    task.weather_update(users_location)
     Alex_voice.speak('I am now listening...')
     while True:
         print('>>|Speak|')
-        voice = str(input('>> '))  # users_voice.get()
+        voice = users_voice.get()
         if 'hello' in voice:
             Alex_voice.speak('Hi there, what can I do for you?')
         elif 'weather update' in voice:
@@ -41,7 +44,9 @@ def alex():
         elif 'search' in voice:
             search = voice.split('search')[-1].strip()
             task.search(search)
-        elif 'note' in voice:
+        elif 'remember this' in voice:
+            Alex_voice.speak('What is it?')
+            print('>>|Speak|')
             note_text = users_voice.get()
             task.take_note(note_text)
         elif 'music' in voice:
@@ -56,6 +61,3 @@ def alex():
         else:
             Alex_voice.speak('Command not registered.')
         Alex_voice.speak('Anything else?')
-
-
-alex()

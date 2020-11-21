@@ -74,7 +74,6 @@ def get_events(day, service):
 def get_date(voice):
     today = datetime.date.today()
     if voice.count("today") > 0:
-        print(today)
         return today
     day = -1
     day_of_week = -1

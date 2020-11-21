@@ -1,7 +1,7 @@
 import face_recognition
 import cv2
 from service import Alex_voice
-import time
+from service import task
 import Alex
 
 video_capture = cv2.VideoCapture(0)
@@ -25,12 +25,11 @@ while True:
     face_encodings = face_recognition.face_encodings(rgb_frame, face_location)
     for (top, right, bottom, left), face_encodings in zip(face_location, face_encodings):
         matches = face_recognition.compare_faces(known_face_encoding, face_encodings)
-        time.sleep(3)
         if True in matches:
             first_match_index = matches.index(True)
             name = known_face_names[first_match_index]
             Alex_voice.speak('Face scanning completed.')
-            Alex_voice.speak(f'Welcome back {name}.')
+            task.greet(name)
             Alex.alex()
         else:
             Alex_voice.speak('Unauthorized person')

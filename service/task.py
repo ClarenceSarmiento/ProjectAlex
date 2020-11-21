@@ -15,6 +15,18 @@ from service import current
 from commands import users_voice
 
 
+def greet(name):
+    current_hour = int(datetime.datetime.now().hour)
+    if 0 <= current_hour < 12:
+        Alex_voice.speak(f'Good Morning {name}!')
+    elif 12 <= current_hour < 18:
+        Alex_voice.speak(f'Good Afternoon {name}!')
+    elif current_hour >= 18 and current_hour != 0:
+        Alex_voice.speak(f'Good Evening {name}!')
+    else:
+        pass
+
+
 def time_update():
     now = datetime.datetime.now()
     time_12hour_format = now.strftime('%I:%M %p').lstrip("0")
@@ -66,11 +78,13 @@ def take_note(voice):
 def website(voice):
     if 'youtube' in voice:
         Alex_voice.speak('What do you want to play?')
+        print('>>|Speak|')
         youtube = users_voice.get()
         Alex_voice.speak(f'Playing {youtube}')
         return kit.playonyt(youtube)
     elif 'google' in voice:
         Alex_voice.speak("What do you want to search for?")
+        print('>>|Speak|')
         google = users_voice.get()
         google = google.split('search for')[-1].strip()
         Alex_voice.speak("Searching...")
@@ -83,6 +97,7 @@ def website(voice):
         return webbrowser.get().open(url)
     elif 'location' in voice:
         Alex_voice.speak("What is the location?")
+        print('>>|Speak|')
         location = users_voice.get()
         url = "https://google.nl/maps/place/" + location + "/&amp;"
         Alex_voice.speak(f'Here is the location of {location}.')
@@ -154,5 +169,8 @@ def close(voice):
     elif 'browser' in voice:
         Alex_voice.speak('Closing Browser')
         return os.system('taskkill/f /im chrome.exe')
+    elif 'notepad' in voice:
+        Alex_voice.speak('Closing Notepad')
+        return os.system('taskkill/f /im notepad.exe')
     else:
         return Alex_voice.speak(f"{voice} is not open.")
