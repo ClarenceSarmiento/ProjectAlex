@@ -58,10 +58,10 @@ def search(voice):
             res = client.query(query)
             result = next(res.results).text
             return Alex_voice.speak(result)
-        except BaseException:
+        except StopIteration:
             result = wikipedia.summary(query, sentences=2)
             return Alex_voice.speak(result)
-    except BaseException:
+    except wikipedia.exceptions.DisambiguationError:
         url = "https://google.com/search?q=" + query
         return webbrowser.get().open(url)
 

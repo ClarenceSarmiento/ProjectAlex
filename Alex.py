@@ -17,7 +17,7 @@ def alex():
     Alex_voice.speak('I am now listening...')
     while True:
         print('>>|Speak|')
-        voice = users_voice.get()
+        voice = input('>> ')# users_voice.get()
         if 'hello' in voice:
             Alex_voice.speak('Hi there, what can I do for you?')
         elif 'weather update' in voice:
@@ -61,3 +61,6 @@ def alex():
         else:
             Alex_voice.speak('Command not registered.')
         Alex_voice.speak('Anything else?')
+
+
+alex()
